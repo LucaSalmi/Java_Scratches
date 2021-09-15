@@ -8,9 +8,9 @@ class Scratch {
         int min = 1;
         int range = max - min + 1;
         int check = 0;
-        //printArray(values);
-        //computeArray(values);
-        //negativeInArray(values);
+        printArray(values);
+        computeArray(values);
+        negativeInArray(values);
 
 
 
