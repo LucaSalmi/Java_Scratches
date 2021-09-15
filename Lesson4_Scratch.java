@@ -10,7 +10,7 @@ class Scratch {
         int check = 0;
         //printArray(values);
         //computeArray(values);
-        //negativeInArray(values);
+        negativeInArray(values);
 
 
 
