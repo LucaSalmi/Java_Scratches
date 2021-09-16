@@ -33,6 +33,7 @@ class Scratch {
 
 
     public static void dieRolls(){
+        System.out.println("Aaaaaaaaaahhhhhh");
 
     }
 
