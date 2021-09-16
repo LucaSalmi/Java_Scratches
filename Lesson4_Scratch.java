@@ -7,15 +7,28 @@ class Scratch {
         int [] values = {1,2,3,4,5,6,7,8,9,10};
         int [] numbers = new int[10];
         int [] randomNumbers = new int[(int) (Math.random()*15)+3];
+        int[] randomNumbers2 = new int[20];
+        int [] test = {4, 5, 6, 5, 5, 4, 4, 6, 5, 1, 5, 4, 1, 5, 5, 5, 6, 2, 6, 5};
         int [] a = {1,5,8,23,54,12,88,12,76,10};
         int [] b = {1,5,8,23,54,12,88,12,76,10};
-        int max = 100;
+        int max = 6;
         int min = 1;
         int range = max - min + 1;
 
+
+        /*
         for (int i = 0; i < randomNumbers.length; i++){
             randomNumbers[i] = (int) (Math.random()*range)+min;
         }
+         */
+
+
+
+        for (int i = 0; i < randomNumbers2.length; i++){
+            randomNumbers2[i] = (int) (Math.random()*range)+min;
+        }
+
+
         //randomArray(values);
         //printArray(values);
         //computeArray(values);
@@ -25,6 +38,10 @@ class Scratch {
         //P66(randomNumbers);
         //P67(randomNumbers);
         //System.out.println("The two arrays are identical: " + equals(a, b));
+        //System.out.println(Arrays.toString(randomNumbers2));
+        //Arrays.sort(randomNumbers2);
+        System.out.println(Arrays.toString(randomNumbers2));
+        dieRolls(randomNumbers2);
 
     }
 
@@ -32,7 +49,43 @@ class Scratch {
 
 
 
-    public static void dieRolls(){
+    public static void dieRolls(int[] dieRolls){
+
+        int counter = 1;
+        int longestCounter = 1;
+        int startPoint = 0;
+        int offset = 0;
+
+        for(int i = 1; i < dieRolls.length; i++){
+
+            if(dieRolls[i] != dieRolls[i-1]){
+                counter = 0;
+            }
+
+            counter ++;
+
+            if (counter >= 2 && counter >= longestCounter){
+                if (counter > longestCounter) {
+                   offset++;
+                    startPoint = i-offset;
+                    longestCounter = counter;
+                }
+            }
+        }
+
+        int stopPoint = (longestCounter + startPoint);
+
+        StringBuffer printReady = new StringBuffer(Arrays.toString(dieRolls));
+        printReady.insert(startPoint*3+1,"(");
+        printReady.insert(stopPoint*3, ")");
+
+
+
+        System.out.println("counter"+counter);
+        System.out.println("long count"+longestCounter);
+        System.out.println("start"+startPoint);
+        System.out.println("stop"+stopPoint);
+        System.out.println(printReady);
 
     }
 
