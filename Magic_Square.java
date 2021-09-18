@@ -26,7 +26,7 @@ class Scratch {
 
     public static int[] fillUp( int[] numbers, Scanner in){
 
-
+        System.out.println("Please note: the square is filled column by column");
         for (int i = 0; i < numbers.length; i++){
 
             System.out.print("write the " + (i+1) + " number: ");
