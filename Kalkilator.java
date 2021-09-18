@@ -25,7 +25,7 @@ class Scratch {
         System.out.println("7: Minimum");
         System.out.println("8: Terminate");
 
-        int selection = 0§;
+        int selection = 0;
         try{
         selection = in.nextInt();
         }

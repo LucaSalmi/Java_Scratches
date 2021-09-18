@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Scratch {
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         int [] values = {1,2,3,4,5,6,7,8,9,10};
-        int [] numbers = new int[10];
         int [] randomNumbers = new int[20];
         int[] randomNumbers2 = new int[20];
         int [] a = {1,5,8,23,54,12,88,12,76,10};
@@ -13,21 +14,21 @@ class Scratch {
         int max = 99;
         int min = 0;
         int range = max - min + 1;
+        int errorCheck = 0;
 
 
 
+        /* Fill array with random numbers
         for (int i = 0; i < randomNumbers.length; i++){
             randomNumbers[i] = (int) (Math.random()*range)+min;
         }
-
-
+         */
 
         /*
         for (int i = 0; i < randomNumbers2.length; i++){
             randomNumbers2[i] = (int) (Math.random()*range)+min;
         }
          */
-
 
         //randomArray(values);
         //printArray(values);
@@ -39,29 +40,161 @@ class Scratch {
         //P67(randomNumbers);
         //System.out.println("The two arrays are identical: " + equals(a, b));
         //dieRolls(randomNumbers2);
-        sort(randomNumbers);
+        //sort(randomNumbers);
 
+
+        // take 16 input
+        int [] numbers = new int[16];
+
+        fillUp(numbers, in);
+
+        if (checkIfSame(numbers) == true){
+
+            if (isSquareMagic(multiDimArray(numbers)) == true){
+                System.out.println("This is a magic square!!");
+            }else{
+                System.out.println("This isn't a magic square");
+            }
+
+        }else{
+            System.out.println("All numbers must be different");
+            System.out.println("Try again");
+            fillUp(numbers, in);
+        }
+
+    }
+
+
+    public static int[] fillUp( int[] numbers, Scanner in){
+
+
+        for (int i = 0; i < numbers.length; i++){
+
+            System.out.print("write the " + (i+1) + " number: ");
+
+            while (!in.hasNextInt()){
+                in.next();
+            }
+            numbers[i] = in.nextInt();
+        }
+        System.out.println(Arrays.toString(numbers));
+        return numbers;
+
+    }
+
+    public static boolean checkIfSame (int[] numbers){
+
+        int counter = 0;
+        int confront = 0;
+        int timesToRun = 1;
+
+        while(timesToRun < numbers.length){
+
+            for (int i = 0; i< numbers.length; i++){
+
+                if (numbers[confront] == numbers[i]){
+                    counter ++;
+                }
+                if (counter == 2){
+                    return false;
+                }
+            }
+            confront ++;
+            timesToRun ++;
+            counter = 0;
+        }
+
+        return true;
+    }
+
+
+    public static int[][] multiDimArray (int[] numbers){
+
+        int [][] magicSquare = new int[4][4];
+
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                magicSquare[i][j] = numbers[(j*4)+i];
+            }
+        }
+        return magicSquare;
+    }
+
+
+    public static boolean isSquareMagic (int [][] magicSquare){
+        int [] sumsOfAll = new int[10];
+        //Sums columns
+        for (int[] var: magicSquare) {
+            sumsOfAll[4] += var[0];
+            sumsOfAll[5] += var[1];
+            sumsOfAll[6] += var[2];
+            sumsOfAll[7] += var[3];
+        }
+        //Sums rows
+        int counter = 0;
+        while (counter < 4){
+
+            for (int var : magicSquare[counter]) {
+                sumsOfAll[counter] += var;
+            }
+            counter++;
+        }
+
+        //Sums diagonals
+        int a = 0;
+        int b = 0;
+        int sum = 0;
+        for (int i = 0; i<4; i++){
+            sum += magicSquare[a][b];
+            a++;
+            b++;
+        }
+        sumsOfAll[8] = sum;
+
+        a = 0;
+        b = 3;
+        sum = 0;
+        for (int i = 0; i<4;i++) {
+            sum += magicSquare[a][b];
+            a++;
+            b--;
+        }
+        sumsOfAll[9] = sum;
+
+        if(isAllSame(sumsOfAll) == true){
+            return true;
+        }else return false;
+
+    }
+
+    public static boolean isAllSame(int [] sums){
+
+        for (int i = 1; i< sums.length; i++) {
+
+            if (sums[i] != sums[i-1]){
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
 
 
 
-
-
+    //P6.14
     public static void sort(int[] randomNumbers){
 
         System.out.println(Arrays.toString(randomNumbers));
         Arrays.sort(randomNumbers);
         System.out.println(Arrays.toString(randomNumbers));
+
     }
 
 
 
-
-
-
-
+    //P6.13
     public static void dieRolls(int[] dieRolls){
 
         int counter = 1;
