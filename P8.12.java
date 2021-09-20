@@ -37,9 +37,15 @@ class Bug{
 
     public void move(int movement){
         if(turn == true){
-            this.position = position + movement;
+            position = position + movement;
         }else{
-            this.position = position - movement;
+            position = position - movement;
+        }
+
+        if (position < 0){
+            System.out.println("I am against a wall");
+            position = 0;
+
         }
     }
 
