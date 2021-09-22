@@ -56,10 +56,6 @@ class Area extends Shapes{
 }
 
 
-
-
-
-
 abstract class Animals{
     public abstract void cats();
     public abstract void dogs();
