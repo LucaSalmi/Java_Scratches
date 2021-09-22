@@ -11,6 +11,7 @@ class Scratch {
         for (int i = 0; i< squares.length; i++){
             squares[i] = new Area();
             squares[i].squareArea(r.nextInt(100));
+
         }
         System.out.println("circles");
         for (int i = 0; i< circle.length; i++){
@@ -29,17 +30,22 @@ class Scratch {
 abstract class Shapes{
     public abstract void rectangleArea(int length, int breadth);
     public abstract void squareArea(int side);
-    public abstract void circleArea(int radius);
+    public abstract void circleArea(double radius);
+    int length;
+    int breadth;
+    int side;
+    double radius;
 }
 class Area extends Shapes{
     double PI = 3.14;
+
     @Override
     public void rectangleArea(int length, int breadth) {
         System.out.println(length*breadth);
     }
 
     @Override
-    public void circleArea(int radius) {
+    public void circleArea(double radius) {
         System.out.println(radius*radius*PI);
     }
 
